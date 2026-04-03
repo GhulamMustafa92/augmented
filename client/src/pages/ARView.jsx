@@ -15,7 +15,7 @@ const ARView = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/menu/${id}`);
+                const response = await axios.get(`/api/menu/${id}`);
                 setProduct(response.data);
             } catch (err) {
                 console.error("Failed to fetch product for AR:", err);

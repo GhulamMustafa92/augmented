@@ -84,11 +84,30 @@ const ARView = () => {
                         </motion.div>
                     ) : (
                         <motion.div 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="w-full h-full"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="w-full h-full flex items-center justify-center p-12 relative"
                         >
-                            <Product3D product={product} />
+                            {/* Ambient background glow */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/10 blur-[100px] rounded-full" />
+                            
+                            <motion.div
+                                className="relative z-10"
+                                animate={{ y: [0, -15, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                            >
+                                <img 
+                                    src={product.image} 
+                                    alt={product.name}
+                                    className="max-h-[400px] w-auto h-auto object-contain drop-shadow-[0_0_50px_rgba(0,243,255,0.3)] relative z-10"
+                                />
+                                {/* Scanner Line Overlay */}
+                                <motion.div
+                                    className="absolute left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-primary to-transparent z-20 opacity-70"
+                                    animate={{ top: ['0%', '100%', '0%'] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                                />
+                            </motion.div>
                         </motion.div>
                     )}
                 </AnimatePresence>

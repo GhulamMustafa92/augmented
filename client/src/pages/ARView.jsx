@@ -19,7 +19,19 @@ const ARView = () => {
                 setProduct(response.data);
             } catch (err) {
                 console.error("Failed to fetch product for AR:", err);
-                setError("Product synchronization failed. Check signal.");
+                // Fallback for demo/offline
+                const mockProducts = [
+                    { _id: '1', name: 'Cyber Burger', image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&auto=format&fit=crop&q=60', description: 'Bioluminescent toppings and high-protein algae bun.' },
+                    { _id: '2', name: 'Neon Sushi', image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=800&auto=format&fit=crop&q=60', description: 'Glow-in-the-dark sushi rolls with electric ginger.' },
+                    { _id: '3', name: 'Plasma Pasta', image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&auto=format&fit=crop&q=60', description: 'Glow-in-the-dark sushi rolls with electric ginger.' },
+                    { _id: '4', name: 'Nebula Nectar', image: 'https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=800&auto=format&fit=crop&q=60', description: 'Star-dust essence beverage.' },
+                ];
+                const found = mockProducts.find(p => p._id === id || p.id === id);
+                if (found) {
+                    setProduct(found);
+                } else {
+                    setError("Neural connection lost. Check satellite link.");
+                }
             } finally {
                 setLoading(false);
             }

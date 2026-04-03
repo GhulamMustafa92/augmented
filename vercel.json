@@ -21,7 +21,7 @@
       "destination": "/client/assets/$1"
     },
     {
-      "source": "/((?!api/|assets/).*)",
+      "source": "/((?!api/|assets/|.*\\.[a-zA-Z0-9]+$).*)",
       "destination": "/client/index.html"
     }
   ]
